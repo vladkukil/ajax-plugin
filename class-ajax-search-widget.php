@@ -4,9 +4,9 @@ class Ajax_Widget extends WP_Widget {
     public function __construct()
     {
         $widget_options = array(
-        'classname'   => 'ajax_widget',
-        'description' => __( 'Ajax Widget' )
-    );
+            'classname'   => 'ajax_widget',
+            'description' => __( 'Ajax Widget' )
+        );
         parent::__construct( 'ajax_widget', __( 'Ajax Widget' ), $widget_options );
     }
 
@@ -18,28 +18,6 @@ class Ajax_Widget extends WP_Widget {
             <button class="button">Get Title</button>
             <input type="hidden" name="action" value="getposttitle">
         </form>
-
-        <script>
-            jQuery(function ( $ ) {
-                $('#get_post_title_form').submit( function (){
-                    let form = $(this);
-                    $.ajax({
-                        url : '<?php echo admin_url('admin-ajax.php');?>',
-                        data : form.serialize(),
-                        type : 'POST',
-                        beforeSend : function ( xhr ){
-                            form.find('button').text( 'Wait pls' );
-                        },
-                        success : function ( data ){
-                            form.find('button').text( 'Get Title' );
-                            form.after( data );
-                        }
-                    });
-                    return false;
-                });
-            });
-        </script>
-
         <?php
 
     }
@@ -59,4 +37,3 @@ function ajax_register_widget() {
     register_widget( 'Ajax_Widget' );
 }
 add_action( 'widgets_init', 'ajax_register_widget' );
-
