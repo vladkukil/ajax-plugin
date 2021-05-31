@@ -24,24 +24,21 @@ function get_title_func(){
     global $wpdb;
     $post_title = !empty($_POST['post_title']) ? $_POST['post_title'] : 0;
     $post_date = ! empty($_POST['post_date']) ? intval($_POST['post_date']) : 0;
-    $query = $wpdb->prepare('SELECT * FROM wp_w42405vkpposts WHERE post_title = %s', $post_title);
+    $query = $wpdb->prepare('SELECT * FROM wp_w42405vkpposts WHERE post_title = %s and post_date > %s',
+        $post_title, $post_date);
     $posts = $wpdb->get_results($query);
 
     if( $posts ){
         foreach ($posts as $post) {
             $url = get_post_permalink($post);
-            if($post->post_date > $post_date ) { ?>
+             ?>
                 <a href="<?php echo $url; ?>"><?php _e($post->post_title); ?></a><br>
                 <?php
-            } else{
-                echo '__(Post not found)'  . '<br>';
             }
-            wp_die();
-        }
     } else {
-        echo '__(Not found)' . '<br>';
-        wp_die();
+        echo __('Not found') . '<br>';
     }
+    wp_die();
 }
 
 add_action( 'wp_enqueue_scripts', 'my_wp_ajax_script' );

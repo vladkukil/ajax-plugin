@@ -14,7 +14,7 @@ class Ajax_Widget extends WP_Widget {
         ?>
         <form action="" id="get_post_title_form">
             <input type="text" name="post_title" placeholder="Enter Title"/>
-            <input type="date" name="post_date" placeholder="enter date"/>
+            <input type="date" name="post_date" placeholder="enter date" required/>
             <button class="button">Get Title</button>
             <input type="hidden" name="action" value="getposttitle">
         </form>
